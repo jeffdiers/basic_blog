@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 export default class Main extends Component{
     render() {
@@ -8,6 +8,7 @@ export default class Main extends Component{
                 <h1>
                     <Link to='/'>Blog</Link>
                 </h1>
+                {React.cloneElement(this.props.children, this.props)}
             </div>
         )
     }
