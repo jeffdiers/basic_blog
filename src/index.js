@@ -19,7 +19,7 @@ const router = (
         <Router history ={history}>
             <Route path="/" component={App}>
                 <IndexRoute component={EntryList}></IndexRoute>
-                <Route path="/view" component={Single}></Route>
+                <Route path="/:entrySlug" component={Single}></Route>
             </Route>
         </Router>
     </Provider>
