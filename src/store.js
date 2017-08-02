@@ -1,19 +1,28 @@
-import { createStore, compose } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { browserHistory } from 'react-router'
+import promiseMiddleware from 'redux-promise'
+import { createLogger } from 'redux-logger'
+import thunk from 'redux-thunk'
 
 //import ther root reducer
 import rootReducer from './reducers/index'
 
-import entries from './data/entries'
+// import entries from './data/entries'
+
+const entries = {
+    all: {},
+    loading: true
+}
 
 //create an object for the default data
 const defaultState = {
     entries
 }
 
-const enhancers = compose(
-    window.devToolsExtension ? window.devToolsExtension() : f => f,
+const enhancers = compose(    
+    applyMiddleware(promiseMiddleware, thunk, createLogger()),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
 )
 
 const store = createStore(rootReducer, defaultState, enhancers)
