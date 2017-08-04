@@ -7,11 +7,16 @@
 
 //take a copy of the state, and return modifyed state
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux';
+import { routerReducer } from 'react-router-redux'
+
 import entries from './entries'
+import postEntry from './postEntry'
+import publishEntry from './publishEntry'
 
 const rootReducer = combineReducers({
   entries,
+  postEntry,
+  publishEntry,
   routing: routerReducer, // new
 });
 

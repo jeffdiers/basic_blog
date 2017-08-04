@@ -12,12 +12,27 @@ import rootReducer from './reducers/index'
 
 const entries = {
     all: {},
-    loading: true
+    error: null,
+    loading: false
+}
+
+const postEntry = {
+    newEntry: {},
+    error: null,
+    loading: false
+}
+
+const publishEntry = {
+    entry: {},
+    error: null,
+    loading: false
 }
 
 //create an object for the default data
 const defaultState = {
-    entries
+    entries,
+    postEntry,
+    publishEntry
 }
 
 const enhancers = compose(    
