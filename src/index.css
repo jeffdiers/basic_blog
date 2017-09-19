@@ -3,3 +3,15 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.date {
+  margin-left: 10px
+}
+
+html, body, .container {
+  height: 100%;
+}
+textarea.form-control {
+  margin-bottom: 10px!important;
+  height: 500px!important;
+}

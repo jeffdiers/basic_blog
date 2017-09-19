@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 
 // Import css
 import './index.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 // Import Components
 import App from './components/App'
@@ -22,7 +23,7 @@ const router = (
         <Router history ={history}>
             <Route path="/" component={App}>
                 <IndexRoute component={EntryList}></IndexRoute>
-                 <Route path="/new-entry" component={NewEntry}></Route>
+                <Route path="/new-entry" component={NewEntry}></Route>
                 <Route path="/entry/:entrySlug" component={Single}></Route>
             </Route>
         </Router>

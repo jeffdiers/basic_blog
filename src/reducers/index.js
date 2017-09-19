@@ -12,11 +12,17 @@ import { routerReducer } from 'react-router-redux'
 import entries from './entries'
 import postEntry from './postEntry'
 import publishEntry from './publishEntry'
+import authors from './authors'
+import deletedEntry from './deleteEntry'
+import unpublishedEntry from './unpublishEntry'
 
 const rootReducer = combineReducers({
   entries,
   postEntry,
   publishEntry,
+  authors,
+  deletedEntry,
+  unpublishedEntry,
   routing: routerReducer, // new
 });
 

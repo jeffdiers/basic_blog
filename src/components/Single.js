@@ -31,7 +31,8 @@ export default class Single extends Component{
             !this.props.entries.loading && this.props.entries.all.data !== undefined ?
                 (entry[0] === undefined ? <div>no entry. turn back.</div> :
                     <div>
-                        <p>{entry[0].fields.title} by: {author[0].fields.name}</p>
+                        <h1>{entry[0].fields.title}</h1>
+                        <p>by: {author[0].fields.name}</p>
                         <p dangerouslySetInnerHTML={renderMarkdown(entry[0].fields.body)} />
                     </div>
                 ) : <strong>loading...</strong>

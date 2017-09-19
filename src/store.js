@@ -28,11 +28,32 @@ const publishEntry = {
     loading: false
 }
 
+const authors = {
+    all: {},
+    error: null,
+    loading: false
+}
+
+const unpublishedEntry = {
+    success: null,
+    error: null,
+    loading: false
+}
+
+const deletedEntry = {
+    success: null,
+    error: null,
+    loading: false
+}
+
 //create an object for the default data
 const defaultState = {
     entries,
     postEntry,
-    publishEntry
+    publishEntry,
+    authors,
+    deletedEntry,
+    unpublishedEntry
 }
 
 const enhancers = compose(    
