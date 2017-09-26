@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+
 
 export default class NewEntry extends Component{
     constructor(props) {
@@ -8,11 +10,10 @@ export default class NewEntry extends Component{
                 title: '',
                 body: '',
                 slug: '',
-                authorId: '',
+                authorId: '6NlkGtfz9uC646WUqa0ca0',
                 date: new Date()
             }
         }
-        console.log(this.state.entry)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.publishEntry = this.publishEntry.bind(this)
         this.renderAuthors = this.renderAuthors.bind(this)
@@ -32,7 +33,7 @@ export default class NewEntry extends Component{
     }
 
     handleSubmit(event) {
-        this.state.entry.slug === '' ? this.generateSlug(this.state.entry.title) : null
+        this.generateSlug(this.state.entry.title)
         let slug = this.state.entry.slug
         this.props.entries.all.data.items.filter((entry) => entry.fields.slug === slug).length === 1 ? alert("enter unique slug") : this.props.createNewEntry(this.state.entry)
         event.preventDefault()
@@ -40,10 +41,13 @@ export default class NewEntry extends Component{
 
     publishEntry(event) {
         this.props.publishEntry(this.props.postEntry.newEntry.payload.data.sys.id)
+                        console.log(this.props.publishEntry.entry)
+
         event.preventDefault()
     }
 
     renderAuthors() {
+        console.log(this.props.authors.all.data.items)
         return this.props.authors.all.data.items.map((author, i) => 
             <div className="radio" key={i}>
                 <label>
@@ -63,37 +67,30 @@ export default class NewEntry extends Component{
     render() {
         return (
             <div>
-                <h4>
-                    New Entry 
-                </h4>
-                <form className="input-group" onSubmit={this.handleSubmit}>
-                    <input 
-                        className="form-control"
-                        type="text" 
-                        placeholder="Title" 
-                        value={this.state.entry.title} 
-                        onChange={this.handleChange.bind(this, 'title')} />
-                    <input 
-                        className="form-control"
-                        type="text" 
-                        placeholder="Slug - auto generated" 
-                        value={this.state.entry.slug} 
-                        onChange={this.handleChange.bind(this, 'slug')} />
-                    <textarea 
-                        className="form-control post-body"
-                        type="text"
-                        placeholder="new post...." 
-                        value={this.state.entry.body} 
-                        onChange={this.handleChange.bind(this, 'body')} />
-                    <ul>
-                        <h5>Select Author</h5>
-                    {!this.props.authors.loading && this.props.authors.all.data !== undefined ? this.renderAuthors() : null}
-                    </ul>
-                    <input className="btn btn-default" type="submit" value="Submit" />
-                </form>
-                {this.props.postEntry.error ? <strong>error posting</strong> : null }
-                {this.props.postEntry.newEntry.payload ? <button onClick={this.publishEntry}>publish</button> : null}
+                <Form onSubmit={this.handleSubmit}>
+                    <FormGroup row>
+                        <Label for="title" sm={2}>Title</Label>
+                        <Col sm={10}>
+                            <Input type="text" name="title" id="title" value={this.state.entry.title} onChange={this.handleChange.bind(this, 'title')} />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label for="body" sm={2}>Entry</Label>
+                        <Col sm={10}>
+                            <Input type="textarea" name="body" id="body" value={this.state.entry.body} onChange={this.handleChange.bind(this, 'body')} />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup check row>
+                        <Col sm={{ size: 10, offset: 2 }}>
+                            <Button>Submit</Button>
+                            {this.props.postEntry.error ? <strong>error posting</strong> : 
+                                this.props.postEntry.newEntry.payload ? <Button onClick={this.publishEntry}>publish</Button> : null }
+                        </Col>
+                    </FormGroup>
+                    {/*{!this.props.authors.loading && this.props.authors.all.data !== undefined ? this.renderAuthors() : null}*/}
+                </Form>
             </div>
         )
     }
 }
+

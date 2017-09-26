@@ -1,22 +1,27 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import { Nav, Navbar, NavbarBrand, NavItem, NavLink } from 'reactstrap'
 
 export default class Main extends Component{
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <h4 className="col-xs-1">
-                        <Link to='/'>Home</Link>
-                    </h4>
-                    <h4 className="col-xs-11">
-                        <Link to='/new-entry'>New Entry</Link>
-                    </h4>
-                </div>
-                <div>
+            <div>
+                <Navbar color="inverse" inverse full toggleable>
+                    <div className="container">
+                        <NavbarBrand tag={Link} to="/">Journal</NavbarBrand>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink tag={Link} to="/new-entry">New Entry</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </div>
+                </Navbar>
+                <br />
+                <div className="container">
                     {React.cloneElement(this.props.children, this.props)}
                 </div>
             </div>
         )
     }
 }
+

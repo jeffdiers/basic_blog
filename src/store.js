@@ -12,38 +12,40 @@ import rootReducer from './reducers/index'
 
 const entries = {
     all: {},
-    error: null,
-    loading: false
+    errorMessage: '',
+    error: false,
+    loading: true
 }
 
 const postEntry = {
     newEntry: {},
     error: null,
-    loading: false
+    loading: true
 }
 
 const publishEntry = {
     entry: {},
+    errorMessage: '',
     error: null,
-    loading: false
+    loading: true
 }
 
 const authors = {
     all: {},
     error: null,
-    loading: false
+    loading: true
 }
 
 const unpublishedEntry = {
     success: null,
     error: null,
-    loading: false
+    loading: true
 }
 
 const deletedEntry = {
     success: null,
     error: null,
-    loading: false
+    loading: true
 }
 
 //create an object for the default data

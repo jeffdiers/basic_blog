@@ -5,9 +5,9 @@ function publishEntry(state={}, action) {
         case PUBLISH_ENTRY_PENDING:
             return { ...state, entry: {}, error: null, loading: true }
         case PUBLISH_ENTRY_SUCCESS:
-            return { ...state, entry: action.payload, error: null, loading: false }
+            return { ...state, entry: action.payload, error: false, loading: false }
         case PUBLISH_ENTRY_FAILURE:
-            return { ...state, entry: {}, error: action.payload, loading: false }
+            return { ...state, entry: {}, errorMessage: action.payload, error: true, loading: false }
         default: 
             return state
     }
