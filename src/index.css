@@ -11,7 +11,18 @@ body {
 html, body, .container {
   height: 100%;
 }
+
 textarea.form-control {
   margin-bottom: 10px!important;
   height: 500px!important;
+}
+
+#content {
+  width: 480px;
+  margin: 0 auto;
+}
+
+.editor {
+  border: 1px solid grey;
+  padding: 6px;
 }

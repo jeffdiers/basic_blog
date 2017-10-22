@@ -20,6 +20,7 @@ export default class Main extends Component{
                 <div className="container">
                     {React.cloneElement(this.props.children, this.props)}
                 </div>
+                <br />
             </div>
         )
     }

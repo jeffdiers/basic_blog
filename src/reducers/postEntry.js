@@ -5,9 +5,9 @@ function postEntry(state={}, action) {
         case POST_ENTRY_PENDING:
             return { ...state, newEntry: {}, error: null, loading: true }
         case POST_ENTRY_SUCCESS:
-            return { ...state, newEntry: action.payload, error: null, loading: false }
+            return { ...state, newEntry: action.payload, error: false, loading: false }
         case POST_ENTRY_FAILURE:
-            return { ...state, newEntry: {}, error: action.payload, loading: false }
+            return { ...state, newEntry: {}, errorMessage: action.payload, error: true, loading: false }
         case RESET_NEW_ENTRY:
             return { ...state, newEntry: {}, error: null, loading: false}
         default: 

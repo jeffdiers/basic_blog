@@ -45,7 +45,7 @@ function mapDispatchToProps(dispatch) {
                 response.error ? dispatch(postEntryFailure(response)) : dispatch(postEntrySuccess(response)) )
         },
 
-        publishEntry: (postId) => {
+        publishNewEntry: (postId) => {
             dispatch(publishEntryPending(postId)).then((response) => 
                 response.error ? dispatch(publishEntryFailure(response)) : dispatch(publishEntrySuccess(response)))
         },
@@ -65,7 +65,6 @@ function mapDispatchToProps(dispatch) {
         },
 
         deleteEntry: (entryId) => {
-            console.log(entryId)
             dispatch(deleteEntryPending(entryId)).then((response) => 
                 response.error ? dispatch(deleteEntryFailure(response)) : dispatch(deleteEntrySuccess(response)))
         }

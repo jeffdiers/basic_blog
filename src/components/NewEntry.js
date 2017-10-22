@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
-import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { ReactMde, ReactMdeCommands } from 'react-mde'
+
+import FroalaEditor from 'react-froala-wysiwyg';
+import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
+
+import {
+    Editor,
+    createEditorState,
+  } from 'medium-draft';
 
 
 export default class NewEntry extends Component{
@@ -12,8 +21,24 @@ export default class NewEntry extends Component{
                 slug: '',
                 authorId: '6NlkGtfz9uC646WUqa0ca0',
                 date: new Date()
-            }
+            },
+            mdeValue: {
+                text: "", 
+                selection: null
+            },
+            editorState: createEditorState(),
+            content: 'Example text'
         }
+        this.handleModelChange = this.handleModelChange.bind(this);
+        
+
+    this.editorOnChange = (editorState) => {
+        const entry = this.state.entry
+        entry.body = editorState
+        this.setState({ entry })
+        this.setState({ editorState });
+      };
+
         this.handleSubmit = this.handleSubmit.bind(this)
         this.publishEntry = this.publishEntry.bind(this)
         this.renderAuthors = this.renderAuthors.bind(this)
@@ -24,6 +49,22 @@ export default class NewEntry extends Component{
         this.props.resetNewEntry()
         this.props.fetchAuthors()
         this.props.fetchEntries()
+    }
+
+    handleModelChange(content) {
+        this.setState({
+            content: content
+        });
+      }
+    
+    handleValueChange(value) {
+        // this.setState({mdeValue: value})
+        const entry = this.state.entry
+        entry.body = value.text
+        this.setState({
+            mdeValue: value,
+            entry: entry
+        })
     }
 
     handleChange(propertyName, event) {
@@ -40,14 +81,11 @@ export default class NewEntry extends Component{
     }
 
     publishEntry(event) {
-        this.props.publishEntry(this.props.postEntry.newEntry.payload.data.sys.id)
-                        console.log(this.props.publishEntry.entry)
-
+        this.props.publishNewEntry(this.props.postEntry.newEntry.payload.data.sys.id)
         event.preventDefault()
     }
 
     renderAuthors() {
-        console.log(this.props.authors.all.data.items)
         return this.props.authors.all.data.items.map((author, i) => 
             <div className="radio" key={i}>
                 <label>
@@ -65,6 +103,8 @@ export default class NewEntry extends Component{
     }
 
     render() {
+        let commands = ReactMdeCommands.getDefaultCommands()
+        const { editorState } = this.state;        
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
@@ -77,7 +117,18 @@ export default class NewEntry extends Component{
                     <FormGroup row>
                         <Label for="body" sm={2}>Entry</Label>
                         <Col sm={10}>
-                            <Input type="textarea" name="body" id="body" value={this.state.entry.body} onChange={this.handleChange.bind(this, 'body')} />
+                <ReactMde
+                    textareaId="ta1"
+                    textareaName="ta1"
+                    value={this.state.mdeValue}
+                    onChange={this.handleValueChange.bind(this)}
+                    commands={commands}
+                     />
+
+                    {/* <Editor
+                        ref="editor"
+                        editorState={editorState}
+                        onChange={this.editorOnChange} /> */}
                         </Col>
                     </FormGroup>
                     <FormGroup check row>
@@ -85,6 +136,8 @@ export default class NewEntry extends Component{
                             <Button>Submit</Button>
                             {this.props.postEntry.error ? <strong>error posting</strong> : 
                                 this.props.postEntry.newEntry.payload ? <Button onClick={this.publishEntry}>publish</Button> : null }
+                            {this.props.publishEntry.error ? <strong>error posting</strong> : 
+                                this.props.publishEntry.newEntry.payload ? <strong>success</strong> : null }
                         </Col>
                     </FormGroup>
                     {/*{!this.props.authors.loading && this.props.authors.all.data !== undefined ? this.renderAuthors() : null}*/}

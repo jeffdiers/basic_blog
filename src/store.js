@@ -19,14 +19,15 @@ const entries = {
 
 const postEntry = {
     newEntry: {},
-    error: null,
+    errorMessage: '',
+    error: false,
     loading: true
 }
 
 const publishEntry = {
-    entry: {},
+    newEntry: {},
     errorMessage: '',
-    error: null,
+    error: false,
     loading: true
 }
 

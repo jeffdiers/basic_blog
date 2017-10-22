@@ -3,16 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "Dante2": "^0.3.6",
     "axios": "^0.16.2",
     "bootstrap": "^4.0.0-alpha.6",
     "contentful": "^4.5.0",
     "dotenv": "^4.0.0",
+    "draft-js": "^0.10.2",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
     "marked": "^0.3.6",
+    "medium-draft": "^0.5.5",
     "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-transition-group": "^15.6.2",
     "react-dom": "^15.6.1",
+    "react-froala-wysiwyg": "^2.7.0-1",
+    "react-mde": "^0.9.5",
     "react-redux": "^5.0.5",
     "react-router": "^2.5.2",
     "react-router-redux": "^4.0.8",
@@ -21,7 +28,8 @@
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
-    "scourjs": "1.0.1"
+    "scourjs": "1.0.1",
+    "showdown": "^1.7.4"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
